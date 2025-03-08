@@ -1,16 +1,24 @@
-# todo
+# todo  
 
 FirstTodoApp
 
-## Getting Started
+처음으로 플루터를 설치함.
 
-This project is a starting point for a Flutter application.
+ubuntu 환경이라 설치가 잘안됨...
 
-A few resources to get you started if this is your first Flutter project:
+플루터를 우분투에 설치할때 리눅스 앱스토어에서 설치하면 안된다...
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+앱스토어로 설치하면 snap으로 설치됨...
+그리고..
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+애뮬레이터나 ndk도 cli로 설치하면
+안드로이드 스튜디오가 못참음
+
+안드로이드 스튜디오만 설치하고
+
+세팅들어가서 sdk 검색후 설치해야 안드로이드 스튜디오가 정상적으로
+
+애뮬레이터와 ndk를 인식함
+
+그냥 설치하면 못찾는다..
+
