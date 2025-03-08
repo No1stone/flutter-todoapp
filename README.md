@@ -21,4 +21,6 @@ ubuntu 환경이라 설치가 잘안됨...
 애뮬레이터와 ndk를 인식함
 
 그냥 설치하면 못찾는다..
+![img.png](readmedir/img.png)
+
 
