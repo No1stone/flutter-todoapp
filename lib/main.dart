@@ -9,85 +9,68 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: TodoApp(),
+      home: ToDoApp(),
     );
   }
 }
 
-class TodoApp extends StatefulWidget {
-  const TodoApp({super.key});
+class ToDoApp extends StatefulWidget {
+  const ToDoApp({super.key});
 
   @override
-  State<TodoApp> createState() => _TodoAppState();
+  State<ToDoApp> createState() => _ToDoAppState();
 }
 
-class _TodoAppState extends State<TodoApp> {
-  final TextEditingController _controller = TextEditingController();
-  final List<String> _todos = []; // 할 일 목록
+class _ToDoAppState extends State<ToDoApp> {
+  List<String> todos = ["플러터 공부하기", "운동하기", "코드 리뷰하기"];
+  TextEditingController _controller = TextEditingController();
 
-  void _addTodo() {
-    if (_controller.text.isNotEmpty) {
-      setState(() {
-        _todos.add(_controller.text);
-        _controller.clear();
-      });
-    }
-  }
-
-  void _removeTodo(int index) {
-    setState(() {
-      _todos.removeAt(index);
-    });
+  // 할 일 수정 다이얼로그
+  void _editTask(int index) {
+    _controller.text = todos[index]; // 기존 값 설정
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('할 일 수정'),
+          content: TextField(
+            controller: _controller,
+            decoration: InputDecoration(hintText: '새로운 할 일 입력'),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('취소'),
+            ),
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  todos[index] = _controller.text; // 수정된 값 반영
+                });
+                Navigator.pop(context);
+              },
+              child: Text('저장'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("To-Do List"),
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _controller,
-                    decoration: const InputDecoration(
-                      hintText: "할 일을 입력하세요",
-                    ),
-                  ),
-                ),
-                IconButton(
-                  onPressed: _addTodo,
-                  icon: const Icon(Icons.add),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            Expanded(
-              child: ListView.builder(
-                itemCount: _todos.length,
-                itemBuilder: (context, index) {
-                  return Card(
-                    child: ListTile(
-                      title: Text(_todos[index]),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.delete),
-                        onPressed: () => _removeTodo(index),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
+      appBar: AppBar(title: Text('To-Do List')),
+      body: ListView.builder(
+        itemCount: todos.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(todos[index]),
+            onTap: () => _editTask(index), // 클릭하면 수정 다이얼로그 실행
+          );
+        },
       ),
     );
   }
