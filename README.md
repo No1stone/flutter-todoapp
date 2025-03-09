@@ -23,4 +23,5 @@ ubuntu 환경이라 설치가 잘안됨...
 그냥 설치하면 못찾는다..
 ![img.png](readmedir/img.png)
 
-
+ndk 파일 위치! 
+![img_1.png](readmedir/img_1.png)
